@@ -1,0 +1,10 @@
+name = CommerceBox: Taxonomy Catalog
+core = 7.x
+package = Taxonomy
+dependencies[] = commercebox_field_bases
+dependencies[] = features
+dependencies[] = image
+dependencies[] = taxonomy
+features[features_api][] = api:2
+features[field_instance][] = taxonomy_term-catalog-field_image
+features[taxonomy][] = catalog

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Jean Products and Displays feature.
+ */
+
+include_once 'jean_products_and_displays.features.inc';

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Checkout Shipping Taxes feature.
+ */
+
+include_once 'checkout_shipping_taxes.features.inc';

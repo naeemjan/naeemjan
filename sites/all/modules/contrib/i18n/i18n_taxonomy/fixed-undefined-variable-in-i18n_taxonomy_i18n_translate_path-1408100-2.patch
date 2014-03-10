@@ -1,0 +1,18 @@
+commit 8313ada2f5fb727502ea245fecc6eb9c1119200e
+Author: Florian Weber <f.weber@digi-info.de>
+Date:   Tue Jan 17 18:47:31 2012 +0100
+
+    Issue #1408100 by camdarley, webflo: Fixed undefined variable $term in i18n_taxonomy_i18n_translate_path().
+
+diff --git a/i18n_taxonomy/i18n_taxonomy.module b/i18n_taxonomy/i18n_taxonomy.module
+index 6ff5bec..43d63f4 100644
+--- a/i18n_taxonomy/i18n_taxonomy.module
++++ b/i18n_taxonomy/i18n_taxonomy.module
+@@ -369,6 +369,7 @@ function i18n_taxonomy_allowed_values($field) {
+ function i18n_taxonomy_i18n_translate_path($path) {
+   if (preg_match("/^(taxonomy\/term\/)([^\/]*)(.*)$/", $path, $matches)) {
+     $links = array();
++    $term = FALSE;
+     // If single term, treat it differently
+     if (is_numeric($matches[2]) && !$matches[3]) {
+       $term = taxonomy_term_load($matches[2]);

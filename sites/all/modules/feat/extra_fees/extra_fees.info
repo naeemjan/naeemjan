@@ -1,0 +1,12 @@
+name = Extra-Fees
+core = 7.x
+package = Features
+dependencies[] = commerce_fees
+dependencies[] = commerce_order
+dependencies[] = commerce_shipping
+dependencies[] = entity
+dependencies[] = rules
+features[features_api][] = api:1
+features[rules_config][] = rules_check_if_the_shipping_is_to_eu
+features[rules_config][] = rules_packing_fee
+features[rules_config][] = rules_packing_fee_no_vat

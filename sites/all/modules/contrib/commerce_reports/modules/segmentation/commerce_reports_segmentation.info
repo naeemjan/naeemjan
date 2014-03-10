@@ -1,0 +1,13 @@
+name = Sales segmentation
+description = View graphical report of sales by segment.
+package = Commerce
+dependencies[] = commerce
+dependencies[] = views_data_export
+core = 7.x
+
+; Information added by drupal.org packaging script on 2012-05-15
+version = "7.x-2.x-dev"
+core = "7.x"
+project = "commerce_reports"
+datestamp = "1337040536"
+

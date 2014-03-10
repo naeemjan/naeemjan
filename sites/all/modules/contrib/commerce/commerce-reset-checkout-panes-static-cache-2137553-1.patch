@@ -1,0 +1,26 @@
+diff --git a/modules/checkout/commerce_checkout.module b/modules/checkout/commerce_checkout.module
+index b666301..6f66122 100644
+--- a/modules/checkout/commerce_checkout.module
++++ b/modules/checkout/commerce_checkout.module
+@@ -471,14 +471,20 @@ function commerce_checkout_page_load($page_id) {
+  *   A boolean that will allow the retrieval of checkout panes directly from
+  *   code. Specifically, it will skip the cache and also prevent configured
+  *   checkout panes data from merging.
++ * @param $reset
++ *   A boolean to reset the static cache in order to retreive updated or new
++ *   panes that have been saved to the database.
+  *
+  * @return
+  *   The array of checkout pane objects, keyed by pane ID.
+  */
+-function commerce_checkout_panes($conditions = array(), $skip_saved_data = FALSE) {
++function commerce_checkout_panes($conditions = array(), $skip_saved_data = FALSE, $reset = FALSE) {
+   if (!$skip_saved_data) {
+     $checkout_panes = &drupal_static(__FUNCTION__);
+   }
++  if ($reset) {
++    $checkout_panes = NULL;
++  }
+ 
+   // Cache the saved checkout pane data if it hasn't been loaded yet.
+   if (!isset($checkout_panes)) {

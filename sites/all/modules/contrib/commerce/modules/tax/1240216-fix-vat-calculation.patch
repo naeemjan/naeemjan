@@ -1,0 +1,37 @@
+diff --git a/modules/tax/commerce_tax.module b/modules/tax/commerce_tax.module
+index fe82f77..4ef076d 100644
+--- a/modules/tax/commerce_tax.module
++++ b/modules/tax/commerce_tax.module
+@@ -478,25 +478,22 @@ function commerce_tax_field_attach_load($entity_type, $entities, $age, $options)
+                 // blank slate to rebuild the components for inclusive taxes.
+                 $item['data']['components'] = array();
+ 
+-                // Reverse apply the tax.
++                // Calculate the tax and non-tax parts of the price.
+                 $tax_amount = $item['amount'] - ($item['amount'] / (1 + $tax_rate['rate']));
+                 $tax_amount = commerce_tax_rate_round_amount($tax_rate, $tax_amount);
++                $base_amount = $item['amount'] - $tax_amount;
+ 
+-                // Add a base price to the data array.
++                // Set the non-tax part of the amount as the base price of the
++                // price field. The tax part will be added by the rules
++                // component during price calculation.
+                 $component = array(
+-                  'amount' => $item['amount'] - $tax_amount,
++                  'amount' => $base_amount,
+                   'currency_code' => $item['currency_code'],
+                   'data' => array(),
+                 );
+-
++                $item['amount'] = $base_amount;
+                 $item['data'] = commerce_price_component_add($item, 'base_price', $component, TRUE);
+ 
+-                // Add the tax to the data array.
+-                $component['amount'] = $tax_amount;
+-                $component['data']['tax_rate'] = $tax_rate;
+-
+-                $item['data'] = commerce_price_component_add($item, $tax_rate['price_component'], $component, TRUE);
+-
+                 // Set the new item on the product entity.
+                 $product->{$field_name}[$langcode][$delta] = $item;
+               }

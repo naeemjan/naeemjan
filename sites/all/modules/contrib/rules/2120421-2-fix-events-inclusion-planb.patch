@@ -1,0 +1,28 @@
+diff --git a/rules.module b/rules.module
+index d2ff900..faf5ced 100644
+--- a/rules.module
++++ b/rules.module
+@@ -8,7 +8,6 @@
+  * Implements hook_init().
+  */
+ function rules_init() {
+-  module_load_include('inc', 'rules', 'modules/events');
+   rules_invoke_event('init');
+ }
+ 
+@@ -959,6 +958,7 @@ function rules_invoke_all() {
+ function rules_invoke_event() {
+   global $conf;
+ 
++  module_load_include('inc', 'rules', 'modules/events');
+   $args = func_get_args();
+   $event_name = $args[0];
+   unset($args[0]);
+@@ -991,6 +991,7 @@ function rules_invoke_event() {
+ function rules_invoke_event_by_args($event_name, $args = array()) {
+   global $conf;
+ 
++  module_load_include('inc', 'rules', 'modules/events');
+   // We maintain a whitelist of configured events to reduces the number of cache
+   // reads. We access it directly via the global $conf as this is fast without
+   // having to introduce another static cache. Then, if the whitelist is unset,

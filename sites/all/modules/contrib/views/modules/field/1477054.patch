@@ -1,0 +1,15 @@
+diff --git a/modules/field/views_handler_field_field.inc b/modules/field/views_handler_field_field.inc
+index ef4f23a..905532b 100644
+--- a/modules/field/views_handler_field_field.inc
++++ b/modules/field/views_handler_field_field.inc
+@@ -86,7 +86,9 @@ class views_handler_field_field extends views_handler_field {
+    */
+   function access() {
+     $base_table = $this->get_base_table();
+-    return field_access('view', $this->field_info, $this->definition['entity_tables'][$base_table]);
++    $base_table_data = views_fetch_data($base_table);
++    $entity_type = $base_table_data['table']['entity type'];
++    return field_access('view', $this->field_info, $entity_type);
+   }
+ 
+   /**
